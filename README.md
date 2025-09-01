@@ -1,0 +1,1 @@
+This is the initial README for my Fall 2025 Discrete Math course at JHU
