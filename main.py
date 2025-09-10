@@ -5,17 +5,15 @@ import sys
 import argparse
 import projectOneIO as pio
 
-# Set up argument parser. A single argument is expected: the filename (not full path), e.g., statements.txt
-
-parser = argparse.ArgumentParser(description="Process a filename.")
-parser.add_argument("filename", type=str, help="Name of the file (not the full path)")
+# Set up argument parser. Two arguments are expected: input filename and output filename (not full paths)
+parser = argparse.ArgumentParser(description="Process input and output filenames.")
+parser.add_argument("input_filename", type=str, help="Name of the input file (not the full path)")
+parser.add_argument("output_filename", type=str, help="Name of the output file (not the full path)")
 args = parser.parse_args()
 
 workingDir = os.getcwd()
-filePath = os.path.join(workingDir, args.filename)
-if os.path.exists(filePath):
-    print(f"Full path to the file: {filePath}")
-else:
+filePath = os.path.join(workingDir, args.input_filename)
+if not os.path.exists(filePath):
     print(f"File does not exist: {filePath}")
     sys.exit(1)
 
@@ -27,5 +25,5 @@ output_dir = os.path.join(workingDir, "output")
 os.makedirs(output_dir, exist_ok=True)
 
 # Write names to output file
-output_file_path = os.path.join(output_dir, "output.txt")
+output_file_path = os.path.join(output_dir, args.output_filename)
 pio.write_output(output_file_path, names)
